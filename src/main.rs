@@ -6,6 +6,7 @@ pub struct Pair {
     v2: i32,
 }
 
+// NOTE: A silly example :)
 macro_rules! pair {
     (_MAX) => {2000};
     (_MIN) => {-2000};
@@ -185,15 +186,13 @@ macro_rules! recurrence {
 // board_zip!((J 0, K 1, L 2), (1, 2, 3));
 
 fn main() {
-    // let p = pair!(R);
-    // let p2 = pair!(p);
+    let p = pair!(R);
+    let p2 = pair!(p);
 
-    // println!("p: {:?}, p2: {:?}", p, p2);
+    println!("p: {:?}, p2: {:?}\n", p, p2);
 
     // dbg_with_name![A5, A6, A7, B5, B6, B7, C5, C6, C7];
-
     // dbg_with_name![J1, K2, L3];
-
     // dbg_with_name![p, p2];
 
     measure_this_csv!(a = [1, 1, 1]);
@@ -201,7 +200,7 @@ fn main() {
 
     let fib = recurrence!(a[n]: u64 = 0, 1 => a[n - 2] + a[n - 1]);
 
-    let mut n: usize = 100;
+    let mut n: usize = 20;
 
     let args = std::env::args().skip(1).collect::<Vec<_>>();
 
@@ -209,9 +208,9 @@ fn main() {
         n = args[0].parse().unwrap_or(n);
     }
 
-    println!("fib.take({})", n);
+    println!("\n\nfib.take({})", n);
 
-    for e in fib.take(n) {
-        println!("{}", e)
+    for e in fib.take(n).enumerate() {
+        println!("{:^4}: {:}  -- {:?}", e.0, e.1, e);
     }
 }
